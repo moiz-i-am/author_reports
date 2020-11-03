@@ -4,9 +4,7 @@ import {
   Body,
   Get,
   Param,
-  Patch,
   Delete,
-  HttpStatus,
   Put,
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
