@@ -18,19 +18,24 @@ export class ReportsController {
   @Get()
   async findAllReports(): Promise<Report[]> {
     const reports = this.reportService.findAll();
+
     return reports;
   }
 
   @Get(':id')
   async findOne(@Param('id') id): Promise<Report> {
-    return this.reportService.findById(id);
+    const reportIndividual = this.reportService.findById(id);
+
+    return reportIndividual;
   }
 
   @Post()
   async createReport(
     @Body() createReportDto: CreateReportDto,
   ): Promise<Report> {
-    return this.reportService.create(createReportDto);
+    const reportCreation = this.reportService.create(createReportDto);
+
+    return reportCreation;
   }
 
   @Put(':id')
@@ -38,11 +43,15 @@ export class ReportsController {
     @Body() updateAuthorDto: CreateReportDto,
     @Param('id') id,
   ): Promise<Report> {
-    return this.reportService.update(id, updateAuthorDto);
+    const reportModify = this.reportService.update(id, updateAuthorDto);
+
+    return reportModify;
   }
 
   @Delete(':id')
   async delete(@Param('id') id): Promise<Report> {
-    return this.reportService.delete(id);
+    const reportRemove = this.reportService.delete(id);
+
+    return reportRemove;
   }
 }

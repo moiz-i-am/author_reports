@@ -11,32 +11,39 @@ export class ReportsService {
   ) {}
 
   async findAll(): Promise<Report[]> {
-    return await this.reportModel.find();
+    const reportAll = this.reportModel.find();
+
+    return reportAll;
   }
 
   async findById(id: string): Promise<Report> {
-    return await this.reportModel.findOne({ _id: id });
+    const reportIndividual = this.reportModel.findOne({ _id: id });
+
+    return reportIndividual;
   }
 
   async create(createReportDto: CreateReportDto): Promise<Report> {
     const createReport = new this.reportModel(createReportDto);
+
     return createReport.save();
   }
 
-  async update(id: string, reportData): Promise<Report> {
-    // type of data param of update func ????????????????
-    console.log('data is =====> ', reportData);
-    return await this.reportModel.findOneAndUpdate(
+  async update(id: string, report: Partial<Report>): Promise<Report> {
+    const reportModify = this.reportModel.findOneAndUpdate(
       { _id: id },
       {
-        title: reportData.title,
-        data: reportData.data,
-        authorId: reportData.authorId,
+        title: report.title,
+        data: report.data,
+        authorId: report.authorId,
       },
     );
+
+    return reportModify;
   }
 
   async delete(id: string): Promise<Report> {
-    return await this.reportModel.findOneAndDelete({ _id: id });
+    const reportRemove = this.reportModel.findOneAndDelete({ _id: id });
+
+    return reportRemove;
   }
 }
