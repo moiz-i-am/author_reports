@@ -18,19 +18,24 @@ export class AuthorsController {
   @Get()
   async getAllAuthors(): Promise<Author[]> {
     const authors = this.authorService.findAll();
+
     return authors;
   }
 
   @Get(':id')
   async findOne(@Param('id') id): Promise<Author> {
-    return this.authorService.findById(id);
+    const authorIndividual = this.authorService.findById(id);
+
+    return authorIndividual;
   }
 
   @Post()
   async createAuthor(
     @Body() createAuthorDto: CreateAuthorDto,
   ): Promise<Author> {
-    return this.authorService.create(createAuthorDto);
+    const authorCreation = this.authorService.create(createAuthorDto);
+
+    return authorCreation;
   }
 
   @Put(':id')
@@ -38,11 +43,15 @@ export class AuthorsController {
     @Body() updateAuthorDto: CreateAuthorDto,
     @Param('id') id,
   ): Promise<Author> {
-    return this.authorService.update(id, updateAuthorDto);
+    const authorModify = this.authorService.update(id, updateAuthorDto);
+
+    return authorModify;
   }
 
   @Delete(':id')
   async delete(@Param('id') id): Promise<Author> {
-    return this.authorService.delete(id);
+    const authorRemove = this.authorService.delete(id);
+
+    return authorRemove;
   }
 }
