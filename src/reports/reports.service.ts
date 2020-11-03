@@ -23,13 +23,15 @@ export class ReportsService {
     return createReport.save();
   }
 
-  async update(id: string, report: Partial<Report>): Promise<Report> {
+  async update(id: string, reportData): Promise<Report> {
+    // type of data param of update func ????????????????
+    console.log('data is =====> ', reportData);
     return await this.reportModel.findOneAndUpdate(
       { _id: id },
       {
-        title: report.title,
-        data: report.data,
-        authorId: report.authorId,
+        title: reportData.title,
+        data: reportData.data,
+        authorId: reportData.authorId,
       },
     );
   }
