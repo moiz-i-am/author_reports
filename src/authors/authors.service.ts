@@ -11,28 +11,26 @@ export class AuthorsService {
   ) {}
 
   async findAll(): Promise<Author[]> {
-    return await this.authorModel.find();
+    return this.authorModel.find();
   }
 
-  async findById(id: string): Promise<Author> {
-    return await this.authorModel.findOne({ _id: id });
+  async findById(id: string): Promise<Author | undefined> {
+    return this.authorModel.findOne({ _id: id });
   }
 
   async create(createAuthorDto: CreateAuthorDto): Promise<Author> {
     const createdAuthor = new this.authorModel(createAuthorDto);
-    return await createdAuthor.save();
+    return createdAuthor.save();
   }
 
-  async update(id: string, data): Promise<Author> {
-    // type of data param of update func ????????????????
-    console.log('data is =====> ', data);
-    return await this.authorModel.findOneAndUpdate(
+  async update(id: string, author: Partial<Author>): Promise<Author> {
+    return this.authorModel.findOneAndUpdate(
       { _id: id },
-      { name: data.name },
+      { name: author.name },
     );
   }
 
   async delete(id: string): Promise<Author> {
-    return await this.authorModel.findOneAndDelete({ _id: id });
+    return this.authorModel.findOneAndDelete({ _id: id });
   }
 }
