@@ -20,29 +20,31 @@ export class AuthorsReportController {
     const reports = this.authorReportService.findAll(authorId);
 
     return reports;
-    // return {
-    //   message: `In a real example, I would return the message with an id of ${authorId}`,
-    // };
   }
 
-  // @Get(':authorId/reports/:reportId')
-  // async getAuthorReport(
-  //   @Param('authorId') authorId,
-  //   @Param('reportId') reportId,
-  // ): Promise<Report> {
-  //   const reportIndividual = this.authorReportService.findById(
-  //     authorId,
-  //     reportId,
-  //   );
+  @Get(':authorId/reports/:reportId')
+  async getAuthorReport(
+    @Param('authorId') authorId,
+    @Param('reportId') reportId,
+  ): Promise<Report> {
+    const reportIndividual = this.authorReportService.findById(
+      authorId,
+      reportId,
+    );
 
-  //   return reportIndividual;
-  //   // return {
-  //   //   message: `In a real example, I would return the message with an id of ${authorId} ${reportId}`,
-  //   // };
-  // }
+    return reportIndividual;
+  }
 
-  // @Post(':authorId/reports')
-  // async saveAuthorReport(
-  //   @Body() createReportDto: CreateReportDto,
-  // ): Promise<Report> {}
+  @Post(':authorId/reports')
+  async saveAuthorReport(
+    @Param('authorId') authorId,
+    @Body() createReportDto: CreateReportDto,
+  ): Promise<Report> {
+    const reportCreation = this.authorReportService.createById(
+      authorId,
+      createReportDto,
+    );
+
+    return reportCreation;
+  }
 }

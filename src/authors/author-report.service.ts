@@ -16,4 +16,23 @@ export class AuthorReportService {
 
     return findAllReports;
   }
+
+  async findById(authorId: string, reportId: string): Promise<Report> {
+    const findReportById = this.authorReportModel.findOne({
+      _id: reportId,
+      authorId,
+    });
+
+    return findReportById;
+  }
+
+  async createById(authorId: string, report: Partial<Report>): Promise<Report> {
+    const createReport = this.authorReportModel.create({
+      title: report.title,
+      data: report.data,
+      authorId,
+    });
+
+    return createReport;
+  }
 }
