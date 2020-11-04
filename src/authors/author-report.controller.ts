@@ -47,4 +47,17 @@ export class AuthorsReportController {
 
     return reportCreation;
   }
+
+  @Delete(':authorId/reports/:reportId')
+  async deleteAuthorReport(
+    @Param('authorId') authorId,
+    @Param('reportId') reportId,
+  ): Promise<Report> {
+    const reportRemove = this.authorReportService.deleteById(
+      authorId,
+      reportId,
+    );
+
+    return reportRemove;
+  }
 }

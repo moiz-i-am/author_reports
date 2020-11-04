@@ -35,4 +35,13 @@ export class AuthorReportService {
 
     return createReport;
   }
+
+  async deleteById(authorId: string, reportId: string): Promise<Report> {
+    const findReportById = this.authorReportModel.findOneAndDelete({
+      _id: reportId,
+      authorId,
+    });
+
+    return findReportById;
+  }
 }
