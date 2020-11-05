@@ -6,14 +6,17 @@ import {
   Param,
   Delete,
   Put,
+  UseGuards
 } from '@nestjs/common';
 import { AuthorsService } from './authors.service';
 import { Author } from './interfaces/author.interface';
 import { CreateAuthorDto } from './dto/create-author.dto';
 
+import { JwtAuthGuard } from './../auth/guards/jwt-auth.guard'
+
 @Controller('authors')
 export class AuthorsController {
-  constructor(private readonly authorService: AuthorsService) {}
+  constructor(private readonly authorService: AuthorsService) { }
 
   @Get()
   async getAllAuthors(): Promise<Author[]> {
@@ -22,6 +25,7 @@ export class AuthorsController {
     return authors;
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Param('id') id): Promise<Author> {
     const authorIndividual = this.authorService.findById(id);
