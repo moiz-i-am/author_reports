@@ -10,7 +10,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/AuthorReportsDB'),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     AuthorsModule,
     ReportsModule,
     AuthModule,
@@ -18,4 +18,4 @@ import { AuthModule } from './auth/auth.module';
   controllers: [AppController, AuthorsController, ReportsController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
