@@ -9,7 +9,9 @@ import { ReportsController } from './reports/reports.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/AuthorReportsDB'),
+    MongooseModule.forRoot(
+      process.env.MONGODB_URI || 'mongodb://localhost:27017/AuthorReportsDB',
+    ),
     AuthorsModule,
     ReportsModule,
   ],
